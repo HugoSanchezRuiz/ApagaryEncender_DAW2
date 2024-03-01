@@ -1,0 +1,10 @@
+BD con las siguientes tablas:
+- tbl_usuarios (idea 1): id, nombre, email, pwd, tipo_usuario
+- tbl_incidencias (idea 1): id, id_cliente (FK), id_tecnico (FK), Estado (Creada, Asignada, En proceso, Acabada, Cerrada), Prioridad (Baja, media, Alta), id_categoria (FK), id_subcategoria (FK)
+- tbl_roles (idea 1): id, tbl_roles
+- tbl_categorias  (idea 1): id, nombre
+- tbl_subcategoria (idea 1): id, nombre
+
+
+- tbl_usuarios (idea 2): id, nombre, email, pwd, id_tipo (FK)
+- tbl_incidencias (idea 2): id, id_cliente (FK), id_tecnico (FK), Estado (Creada, Asignada, En proceso, Acabada, Cerrada), Prioridad (Baja, media, Alta), categoria, subcategoria
