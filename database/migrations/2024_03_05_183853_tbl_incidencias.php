@@ -15,7 +15,6 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('id_tecnico');
             $table->unsignedBigInteger('id_cliente');
-            $table->unsignedBigInteger('id_categoria');
             $table->unsignedBigInteger('id_subcategoria');
             $table->enum('estado', ['Sin asignar', 'Asignada', 'En proceso', 'Resuelta', 'Cerrada'])->default('Sin asignar');
             $table->timestamps();
@@ -23,7 +22,6 @@ return new class extends Migration
             /* FK */
             $table->foreign('id_tecnico')->references('id')->on('tbl_usuarios')->onDelete('cascade');
             $table->foreign('id_cliente')->references('id')->on('tbl_usuarios')->onDelete('cascade');
-            $table->foreign('id_categoria')->references('id')->on('tbl_categorias')->onDelete('cascade');
             $table->foreign('id_subcategoria')->references('id')->on('tbl_subcategorias')->onDelete('cascade');
         });
     }
