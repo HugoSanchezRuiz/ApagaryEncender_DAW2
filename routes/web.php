@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', function () {return view('welcome');});
+
+/* Ruta a la vista de administrador */
+Route::get('/admin', function () {return view('vistas.admin');});
