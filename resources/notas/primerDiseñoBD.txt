@@ -1,0 +1,82 @@
+`` -- Tabla de Usuarios
+CREATE TABLE usuarios (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    rol ENUM('administrador', 'client', 'gestor', 'tecnic') NOT NULL,
+    sede_id INT NOT NULL,
+    supervisor_id INT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (supervisor_id) REFERENCES usuarios(id) ON DELETE SET NULL,
+    FOREIGN KEY (sede_id) REFERENCES sedes(id) ON DELETE CASCADE
+);
+
+-- Tabla de Sedes
+CREATE TABLE sedes (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(50) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- Tabla de Incidencias
+CREATE TABLE incidencias (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    categoria_id INT NOT NULL,
+    subcategoria_id INT NOT NULL,
+    cliente_id INT NOT NULL,
+    tecnico_id INT,
+    descripcion TEXT NOT NULL,
+
+    estado ENUM('Sense assignar', 'Assignada', 'En treball', 'Resolta', 'Tancada') DEFAULT 'Sense assignar',
+
+    prioridad ENUM('alta', 'mitjana', 'baixa') DEFAULT 'baixa',
+    
+    comentario_cliente TEXT,
+    
+    fecha_reporte TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    fecha_resolucion TIMESTAMP,
+    
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE 
+    CURRENT_TIMESTAMP,
+    
+    FOREIGN KEY (cliente_id) REFERENCES usuarios(id) ON DELETE CASCADE,
+    FOREIGN KEY (tecnico_id) REFERENCES usuarios(id) ON DELETE SET NULL,
+    FOREIGN KEY (categoria_id) REFERENCES categorias(id) ON DELETE CASCADE,
+    FOREIGN KEY (subcategoria_id) REFERENCES subcategorias(id) ON DELETE CASCADE
+);
+
+-- Tabla de Categorias
+CREATE TABLE categorias (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(50) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- Tabla de Subcategorias
+CREATE TABLE subcategorias (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(50) NOT NULL,
+    categoria_id INT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (categoria_id) REFERENCES categorias(id) ON DELETE CASCADE
+);
+
+-- Tabla de Mensajes (Opcional)
+CREATE TABLE mensajes (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    incidencia_id INT NOT NULL,
+    emisor_id INT NOT NULL,
+    receptor_id INT NOT NULL,
+    mensaje TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (incidencia_id) REFERENCES incidencias(id) ON DELETE CASCADE,
+    FOREIGN KEY (emisor_id) REFERENCES usuarios(id) ON DELETE CASCADE,
+    FOREIGN KEY (receptor_id) REFERENCES usuarios(id) ON DELETE CASCADE
+);
+``
