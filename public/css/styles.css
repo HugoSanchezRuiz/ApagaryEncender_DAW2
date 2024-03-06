@@ -1,0 +1,50 @@
+/* Agregar estilos al formulario de inicio de sesión */
+
+.container {
+    margin-top: 50px;
+}
+
+.card {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+}
+
+.card-header {
+    background-color: #3490dc;
+    color: #ffffff;
+    border-bottom: 1px solid #ddd;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.col-md-8 {
+    margin-top: 10px;
+}
+
+.invalid-feedback {
+    color: #dc3545;
+}
+
+.btn-primary {
+    background-color: #3490dc;
+    border-color: #3490dc;
+}
+
+.btn-primary:hover {
+    background-color: #2779bd;
+    border-color: #2779bd;
+}
+
+.btn-link {
+    color: #3490dc;
+}
+
+.btn-link:hover {
+    text-decoration: underline;
+}
