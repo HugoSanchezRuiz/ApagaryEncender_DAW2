@@ -4,31 +4,53 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Incidencia;
+use App\Models\Categoria;
+use App\Models\Subcategoria;
 
 class IncidentController extends Controller
 {
     public function index()
     {
-        $incidents = Incidencia::where('user_id', auth()->user()->id)->orderBy('created_at', 'desc')->get();
+        $userId = 12; // ID del usuario
+        $incidents = Incidencia::where('id_cliente', $userId)->orderBy('created_at', 'desc')->get();
 
-        return view('client.incidents.index', compact('incidents'));
+        $categorias = Categoria::all();
+        // No puedes obtener las subcategorías aquí sin saber cuál categoría ha sido seleccionada
+        $subcategorias = [];
+
+        return view('client.incident.index', compact('incidents', 'categorias', 'subcategorias'));
     }
+
+    // public function obtenerSubcategorias($categoriaId)
+    // {
+    //     // Obtener las subcategorías asociadas a la categoría seleccionada
+    //     $subcategorias = Subcategoria::where('id_categoria', $categoriaId)->get();
+
+    //     // Devolver las subcategorías en formato JSON
+    //     return response()->json($subcategorias);
+    // }
+
 
     public function show($id)
     {
         $incident = Incidencia::findOrFail($id);
 
         // Verifica si el usuario tiene acceso a esta incidencia
-        if ($incident->user_id !== auth()->user()->id) {
+        if ($incident->id_cliente !== 12) {
             abort(403, 'No tienes permiso para ver esta incidencia.');
         }
 
-        return view('client.incidents.show', compact('incident'));
+        $categoria = Categoria::findOrFail($incident->subcategoria->id_categoria);
+        $subcategoria = Subcategoria::findOrFail($incident->id_subcategoria);
+
+        return view('client.incident.show', compact('incident', 'categoria', 'subcategoria'));
     }
+
+
 
     public function create()
     {
-        return view('client.incidents.create');
+        return view('client.incident.create');
     }
 
     public function store(Request $request)
@@ -43,7 +65,7 @@ class IncidentController extends Controller
         $incident = new Incidencia([
             'title' => $request->input('title'),
             'description' => $request->input('description'),
-            'status' => 'Sin asignar', // Estado predeterminado al crear una nueva incidencia
+            'estado' => 'Sin asignar',
             'user_id' => $user->id,
         ]);
 

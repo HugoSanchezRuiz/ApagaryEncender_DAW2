@@ -25,21 +25,21 @@ class LoginController extends Controller
      */
     public function login(Request $request)
     {
-        // Validación de datos del formulario
+        // Validate the form data
         $credentials = $request->validate([
             'email' => 'required|email',
             'password' => 'required',
         ]);
 
-        // Intento de inicio de sesión
-        if (Auth::attempt($credentials)) {
-            // Si el inicio de sesión fue exitoso, redirigir al usuario
-            return redirect()->route('home'); // Cambia 'home' por la ruta correcta de tu vista principal para administradores
+        // Attempt to log in the user
+        if (Auth::attempt($credentials, $request->has('remember'))) {
+            // Authentication passed, redirect to the intended destination or a default route
+            return redirect()->intended('/dashboard');
         }
 
-        // Si el inicio de sesión falla, redirigir de nuevo al formulario con un mensaje de error
-        return back()->withErrors([
-            'email' => 'Las credenciales proporcionadas no son válidas.',
+        // Authentication failed, redirect back with an error message
+        return redirect()->back()->withInput($request->only('email', 'remember'))->withErrors([
+            'email' => 'Invalid email or password',
         ]);
     }
 }
