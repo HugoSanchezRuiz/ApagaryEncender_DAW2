@@ -1,3 +1,88 @@
+/* Reset de márgenes para todos los elementos */
 * {
     margin: 0;
+}
+
+/* Estilos para el logotipo en la barra de navegación */
+.navbar-brand {
+    display: flex;
+    align-items: center;
+}
+
+/* Estilos para el logotipo dentro de la barra de navegación */
+#imgLogo {
+    width: 55px;
+    float: left;
+    margin-right: 10px; 
+}
+
+/* Estilos para los elementos de texto dentro de la barra de navegación */
+span {
+    font-size: 15px;
+}
+
+/* Estilos para el menú desplegable */
+.dropdown-menu {
+    min-width: 150px;
+}
+
+.dropdown-menu a {
+    padding: 0.5rem 1rem;
+}
+
+/* Estilos al pasar el ratón sobre los elementos del menú desplegable */
+.dropdown-menu a:hover {
+    background-color: #f8f9fa;
+}
+
+/* Estilos para centrar el contenido dentro de la barra de navegación */
+.navbar-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+/* Estilos para los iconos centrales en la barra de navegación */
+.central-icons {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.central-icons a {
+    display: inline-flex;
+    align-items: center;
+    margin: 0 10px;
+    text-decoration: none;
+    color: #000;
+    transition: color 0.3s;
+}
+
+.central-icons a:hover {
+    color: #007bff;
+}
+
+/* Estilos para el encabezado */
+header {
+    height: 30vh;
+    background-color: #5fa3eb;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-family: 'EB Garamond', serif;
+    font-weight: bolder;
+    color: white; 
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5); 
+}
+
+/* Estilos para los subtítulos */
+h4 {
+    margin-top: 25px;
+    margin-bottom: 15px;
+    margin-left: 25px;
+    font-size: 20px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: bolder;
 }
