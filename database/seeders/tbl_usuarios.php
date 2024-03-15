@@ -23,7 +23,7 @@ class tbl_usuarios extends Seeder
                 'pass' => 'asdASD123',
                 'rol' => 'Cliente',
                 'id_sede' => 1,
-                'id_supervisor' => null, // Cambiado a null para dejarlo vacío
+                'id_supervisor' => 2, 
                 'created_at' => $now,
                 'updated_at' => $now,
             ],
@@ -34,7 +34,7 @@ class tbl_usuarios extends Seeder
                 'pass' => 'asdASD123',
                 'rol' => 'Gestor',
                 'id_sede' => 2,
-                'id_supervisor' => null, // Cambiado a null para dejarlo vacío
+                'id_supervisor' => 1,
                 'created_at' => $now,
                 'updated_at' => $now,
             ],
@@ -44,8 +44,8 @@ class tbl_usuarios extends Seeder
                 'email' => 'david@gmail.com',
                 'pass' => 'asdASD123',
                 'rol' => 'Técnico',
-                'id_sede' => 3,
-                'id_supervisor' => null, // Cambiado a null para dejarlo vacío
+                'id_sede' => 1,
+                'id_supervisor' => 1, 
                 'created_at' => $now,
                 'updated_at' => $now,
             ],
@@ -56,7 +56,7 @@ class tbl_usuarios extends Seeder
                 'pass' => 'asdASD123',
                 'rol' => 'Administrador',
                 'id_sede' => 1,
-                'id_supervisor' => null, // Cambiado a null para dejarlo vacío
+                'id_supervisor' => null,
                 'created_at' => $now,
                 'updated_at' => $now,
             ],
