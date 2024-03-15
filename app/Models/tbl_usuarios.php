@@ -23,11 +23,11 @@ class Usuario extends Model
     // Definir relaciones con otros modelos si es necesario
     public function sede()
     {
-        return $this->belongsTo(Sede::class, 'id_sede');
+        return $this->belongsTo(tbl_sedes::class, 'id_sede');
     }
 
     public function supervisor()
     {
-        return $this->belongsTo(Usuario::class, 'id_supervisor');
+        return $this->belongsTo(tbl_usuarios::class, 'id_supervisor');
     }
 }
