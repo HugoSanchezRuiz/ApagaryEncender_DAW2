@@ -19,7 +19,7 @@ class tbl_incidencias extends Seeder
 
         DB::table("tbl_incidencias")->insert([
             [
-                'id_tecnico' => 2,
+                'id_tecnico' => 1,
                 'id_cliente' => 1, 
                 'id_subcategoria' => 1, 
                 'imagen' => 'Imagen', 
@@ -30,7 +30,7 @@ class tbl_incidencias extends Seeder
             ],
 
             [
-                'id_tecnico' => 2,
+                'id_tecnico' => 1,
                 'id_cliente' => 1, 
                 'id_subcategoria' => 2, 
                 'imagen' => 'Imagen', 
@@ -41,7 +41,7 @@ class tbl_incidencias extends Seeder
             ],
 
             [
-                'id_tecnico' => 3,
+                'id_tecnico' => 2,
                 'id_cliente' => 1, 
                 'id_subcategoria' => 3, 
                 'imagen' => 'Imagen', 
@@ -52,7 +52,7 @@ class tbl_incidencias extends Seeder
             ],
 
             [
-                'id_tecnico' => 1,
+                'id_tecnico' => 2,
                 'id_cliente' => 2, 
                 'id_subcategoria' => 4, 
                 'imagen' => 'Imagen', 
@@ -63,7 +63,7 @@ class tbl_incidencias extends Seeder
             ],
 
             [
-                'id_tecnico' => 2,
+                'id_tecnico' => 3,
                 'id_cliente' => 3, 
                 'id_subcategoria' => 5, 
                 'imagen' => 'Imagen', 
@@ -85,7 +85,7 @@ class tbl_incidencias extends Seeder
             ],
 
             [
-                'id_tecnico' => 3,
+                'id_tecnico' => 1,
                 'id_cliente' => 1, 
                 'id_subcategoria' => 7, 
                 'imagen' => 'Imagen', 
@@ -96,7 +96,7 @@ class tbl_incidencias extends Seeder
             ],
 
             [
-                'id_tecnico' => 3,
+                'id_tecnico' => 2,
                 'id_cliente' => 2, 
                 'id_subcategoria' => 8, 
                 'imagen' => 'Imagen', 
