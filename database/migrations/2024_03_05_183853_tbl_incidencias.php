@@ -16,6 +16,8 @@ return new class extends Migration
             $table->unsignedBigInteger('id_tecnico');
             $table->unsignedBigInteger('id_cliente');
             $table->unsignedBigInteger('id_subcategoria');
+            $table->text('imagen');
+            $table->text('descripción');
             $table->enum('estado', ['Sin asignar', 'Asignada', 'En proceso', 'Resuelta', 'Cerrada'])->default('Sin asignar');
             $table->timestamps();
 
