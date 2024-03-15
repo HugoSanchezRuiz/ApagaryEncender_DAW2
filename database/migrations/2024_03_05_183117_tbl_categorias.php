@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('tbl_categorias',function(Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nombre_categiria');
+            $table->string('nombre_categoria');
             $table->timestamps();
         });
     }
