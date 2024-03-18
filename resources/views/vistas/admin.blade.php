@@ -97,14 +97,24 @@
                 <label for="search">Buscar por nombre de cliente o técnico:</label>
                 <input type="text" name="search" id="search" class="form-control" value="{{ request()->input('search') }}" placeholder="Búsqueda...">
             </div>
+
+            <div class="form-group">
+                <label for="estado">Filtrar por estado:</label>
+                <select name="estado" id="estado" class="form-control">
+                    <option value="">Todas</option>
+                    @foreach ($estados as $estado)
+                        <option value="{{ $estado }}">{{ $estado }}</option>
+                    @endforeach
+                </select>
+            </div>
         </form>
 
-        <!-- Mensajes de error / confirmación -->
+        <!-- Mensajes de error / confirmación
         @if(session('success'))
             <div class="alert alert-success" role="alert">
                 {{ session('success') }}
             </div>
-        @endif
+        @endif -->
 
         <!-- Contenedor de la tabla de incidencias -->
         <div id="incidenciasTable">
@@ -140,19 +150,33 @@
     <script>
         $(document).ready(function() {
             $('#search').on('keyup', function() {
-                var searchText = $(this).val();
+                buscarIncidencias();
+            });
+
+            $('#estado').on('change', function() {
+                buscarIncidencias();
+            });
+
+            function buscarIncidencias() {
+                var searchText = $('#search').val();
+                var estado = $('#estado').val();
+
                 $.ajax({
                     url: '{{ route("incidencia.filtroNombre") }}',
                     type: 'GET',
                     data: {
-                        search: searchText
+                        search: searchText,
+                        estado: estado
                     },
                     success: function(response) {
                         // Actualizar la tabla con los nuevos resultados
                         $('#incidenciasTable').html(response);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(xhr.responseText);
                     }
                 });
-            });
+            }
         });
     </script>
 
