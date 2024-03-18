@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\IncidenciasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,5 +16,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {return view('welcome');});
 
-/* Ruta a la vista de administrador */
-Route::get('/admin', function () {return view('vistas.admin');});
+Route::get('/admin', [IncidenciasController::class, 'index'])->name('vistas.admin');
+
+Route::get('/admin/search', [IncidenciasController::class, 'filtroNombre'])->name('incidencia.filtroNombre');

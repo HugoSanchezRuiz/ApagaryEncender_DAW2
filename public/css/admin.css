@@ -86,3 +86,10 @@ h4 {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-weight: bolder;
 }
+
+form {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-left: 25px;
+    width: 65%;
+}
