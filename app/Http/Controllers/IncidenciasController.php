@@ -28,9 +28,9 @@ class IncidenciasController extends Controller
             ->leftJoin('tbl_usuarios as usuarios_tecnico', 'tbl_incidencias.id_tecnico', '=', 'usuarios_tecnico.id')
             ->leftJoin('tbl_usuarios as usuarios_cliente', 'tbl_incidencias.id_cliente', '=', 'usuarios_cliente.id')
             ->leftJoin('tbl_subcategorias as subcategorias', 'tbl_incidencias.id_subcategoria', '=', 'subcategorias.id')
-            ->where('tbl_incidencias.descripcion', 'like', '%' . $request->search . '%')
+            ->where('usuarios_cliente.nombre_usuario', 'like', '%' . $request->search . '%')
             ->get();
-
+    
         return view('tables.incidencias', compact('incidencias'));
     }
 }

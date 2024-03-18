@@ -93,10 +93,10 @@
             <h4>¡Hola Administrador!</h4>
         </div>
         
-        <!-- Formulario de búsqueda por nombre de incidencia con AJAX -->
+        <!-- Formulario de búsqueda por nombre de cliente con AJAX -->
         <form id="searchForm" action="{{ route('incidencia.filtroNombre') }}" method="GET">
             <div class="form-group">
-                <label for="search">Buscar por nombre:</label>
+                <label for="search">Buscar por nombre de cliente:</label>
                 <input type="text" name="search" id="search" class="form-control" value="{{ request()->input('search') }}" onkeyup="searchProducts()">
             </div>
         </form>
