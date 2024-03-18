@@ -92,9 +92,28 @@ h4 {
     font-weight: bolder;
 }
 
+#tit_filtro {
+    margin-top: 25px;
+    margin-bottom: 15px;
+    margin-left: 25px;
+    font-size: 15px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+/* Estilos formulario */
+
 form {
     margin-top: 15px;
     margin-bottom: 15px;
     margin-left: 25px;
     width: 65%;
+}
+
+.custom-form {
+    display: flex;
+    align-items: center;
+}
+
+.custom-form .form-group {
+    margin-right: 10px; /* Ajusta el margen entre los elementos según lo desees */
 }

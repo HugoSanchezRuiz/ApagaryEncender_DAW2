@@ -92,15 +92,15 @@
         </div>
         
         <!-- Formulario de búsqueda por nombre de cliente con AJAX -->
-        <form id="searchForm" action="{{ route('incidencia.filtroNombre') }}" method="GET">
+        <h2 id="tit_filtro">Filtrar por:</h2>
+        <form id="searchForm" action="{{ route('incidencia.filtroNombre') }}" method="GET" class="custom-form">
             <div class="form-group">
-                <label for="search">Buscar por nombre de cliente o técnico:</label>
-                <input type="text" name="search" id="search" class="form-control" value="{{ request()->input('search') }}" placeholder="Búsqueda...">
+                <input type="text" name="search" id="search" class="form-control" value="{{ request()->input('search') }}" placeholder="Nombre...">
             </div>
 
             <div class="form-group">
-                <label for="estado">Filtrar por estado:</label>
                 <select name="estado" id="estado" class="form-control">
+                    <option value="" disabled selected>-- Estado --</option>
                     <option value="">Todas</option>
                     @foreach ($estados as $estado)
                         <option value="{{ $estado }}">{{ $estado }}</option>
