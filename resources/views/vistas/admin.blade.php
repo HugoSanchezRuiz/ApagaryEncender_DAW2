@@ -95,7 +95,7 @@
         <h2 id="tit_filtro">Filtrar por:</h2>
         <form id="searchForm" action="{{ route('incidencia.filtroNombre') }}" method="GET" class="custom-form">
             <div class="form-group">
-                <input type="text" name="search" id="search" class="form-control" value="{{ request()->input('search') }}" placeholder="Nombre...">
+                <input type="text" name="search" id="search" class="form-control" value="{{ request()->input('search') }}" placeholder="-- Nombre --">
             </div>
 
             <div class="form-group">
@@ -107,14 +107,17 @@
                     @endforeach
                 </select>
             </div>
-        </form>
 
-        <!-- Mensajes de error / confirmación
-        @if(session('success'))
-            <div class="alert alert-success" role="alert">
-                {{ session('success') }}
+            <div class="form-group">
+                <select name="categoria" id="categoria" class="form-control">
+                    <option value="" disabled selected>-- Categoría --</option>
+                    <option value="">Todas</option>
+                    @foreach ($categorias as $categoria)
+                        <option value="{{ $categoria }}">{{ $categoria }}</option>
+                    @endforeach
+                </select>
             </div>
-        @endif -->
+        </form>
 
         <!-- Contenedor de la tabla de incidencias -->
         <div id="incidenciasTable">
@@ -145,43 +148,47 @@
         });
     </script>
 
+    <!-- Bootstrap JS y JQUERY -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+
     <!-- Script para realizar la búsqueda AJAX -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function() {
-            $('#search').on('keyup', function() {
-                buscarIncidencias();
-            });
-
-            $('#estado').on('change', function() {
-                buscarIncidencias();
-            });
-
-            function buscarIncidencias() {
-                var searchText = $('#search').val();
-                var estado = $('#estado').val();
+            // Función para actualizar la tabla de incidencias
+            function actualizarTabla() {
+                var formData = $('#searchForm').serialize(); // Obtener los datos del formulario
 
                 $.ajax({
-                    url: '{{ route("incidencia.filtroNombre") }}',
+                    url: $('#searchForm').attr('action'),
                     type: 'GET',
-                    data: {
-                        search: searchText,
-                        estado: estado
-                    },
+                    data: formData,
                     success: function(response) {
-                        // Actualizar la tabla con los nuevos resultados
-                        $('#incidenciasTable').html(response);
+                        $('#incidenciasTable').html(response); // Actualizar la tabla de incidencias con los nuevos resultados
                     },
                     error: function(xhr, status, error) {
                         console.error(xhr.responseText);
                     }
                 });
             }
+
+            // Actualizar la tabla cuando se cambia el valor en el campo de búsqueda o el estado
+            $('#search').on('keyup', function() {
+                actualizarTabla();
+            });
+
+            $('#estado, #categoria').on('change', function() {
+                actualizarTabla();
+            });
+
+            // Evitar envío del formulario cuando se presiona Enter
+            $('#searchForm').on('keypress', function(e) {
+                if (e.which === 13) { // 13 es el código de tecla para Enter
+                    e.preventDefault();
+                }
+            });
         });
     </script>
-
-    <!-- Bootstrap JS y JQUERY -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>    
 </body>
 </html>

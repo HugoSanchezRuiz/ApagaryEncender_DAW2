@@ -27,6 +27,7 @@
                 <tr>
                     <th scope="col">Técnico</th>
                     <th scope="col">Cliente</th>
+                    <th scope="col">Categoria</th>
                     <th scope="col">Subcategoria</th>
                     <th scope="col">Descripción</th>
                     <th scope="col">Imagen</th>
@@ -39,6 +40,7 @@
                 <tr>
                     <td>{{$incidencia->tecnico_nombre}}</td>
                     <td>{{$incidencia->cliente_nombre}}</td>
+                    <td>{{$incidencia->categoria_nombre}}</td>
                     <td>{{$incidencia->subcategoria_nombre}}</td>
                     <td>{{$incidencia->descripcion}}</td>
                     <td>{{$incidencia->imagen}}</td>
