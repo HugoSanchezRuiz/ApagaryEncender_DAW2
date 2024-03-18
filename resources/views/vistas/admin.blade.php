@@ -6,10 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!-- Bootstrap icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">  
-    <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"> 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>       
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"> 
     <!-- Fuente Header -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -36,10 +34,10 @@
 
             <div class="central-icons"> <!-- Div central para iconos -->
                 <a href="#" class="mx-2" id="btnIncidencias">
-                    <i class="bi bi-exclamation-circle"></i>  Incidencias
+                    <i class="bi bi-exclamation-circle"></i>Incidencias
                 </a>
                 <a href="#" class="mx-2" id="btnUsuarios">
-                    <i class="bi bi-person-circle"></i>  Usuarios
+                    <i class="bi bi-person-circle"></i>Usuarios
                 </a>
             </div>
             
@@ -96,8 +94,8 @@
         <!-- Formulario de búsqueda por nombre de cliente con AJAX -->
         <form id="searchForm" action="{{ route('incidencia.filtroNombre') }}" method="GET">
             <div class="form-group">
-                <label for="search">Buscar por nombre de cliente:</label>
-                <input type="text" name="search" id="search" class="form-control" value="{{ request()->input('search') }}">
+                <label for="search">Buscar por nombre de cliente o técnico:</label>
+                <input type="text" name="search" id="search" class="form-control" value="{{ request()->input('search') }}" placeholder="Búsqueda...">
             </div>
         </form>
 
@@ -157,5 +155,9 @@
             });
         });
     </script>
+
+    <!-- Bootstrap JS y JQUERY -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>    
 </body>
 </html>
