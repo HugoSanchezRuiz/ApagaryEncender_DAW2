@@ -96,7 +96,7 @@ class tbl_incidencias extends Seeder
             ],
 
             [
-                'id_tecnico' => 2,
+                'id_tecnico' => 5,
                 'id_cliente' => 2, 
                 'id_subcategoria' => 8, 
                 'imagen' => 'Imagen', 
