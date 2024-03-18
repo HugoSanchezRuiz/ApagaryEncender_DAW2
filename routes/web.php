@@ -2,6 +2,21 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IncidenciasController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\TecnicoController;
+
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');
+    // Agrega más rutas específicas para el administrador según sea necesario
+});
+
+// Route::middleware(['auth'])->group(function () {
+//     Route::get('/', function () {
+//         return view('admin.index'); // Cambia 'admin.index' por la ruta correcta de tu vista principal para administradores
+//     })->name('home');
+// });
 
 /*
 |--------------------------------------------------------------------------
@@ -14,8 +29,7 @@ use App\Http\Controllers\IncidenciasController;
 |
 */
 
-Route::get('/', function () {return view('welcome');});
-
+Route::get('/login', [LoginController::class, 'showForm'])->name('login');
+Route::post('/login', [LoginController::class, 'login'])->name('login.submit');
 Route::get('/admin', [IncidenciasController::class, 'index'])->name('vistas.admin');
-
 Route::get('/admin/search', [IncidenciasController::class, 'filtroNombre'])->name('incidencia.filtroNombre');
