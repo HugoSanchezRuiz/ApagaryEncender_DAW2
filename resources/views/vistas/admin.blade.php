@@ -36,10 +36,10 @@
 
             <div class="central-icons"> <!-- Div central para iconos -->
                 <a href="#" class="mx-2" id="btnIncidencias">
-                    <i class="bi bi-exclamation-circle">  Incidencias</i>
+                    <i class="bi bi-exclamation-circle"></i>  Incidencias
                 </a>
                 <a href="#" class="mx-2" id="btnUsuarios">
-                    <i class="bi bi-person-circle">  Usuarios</i>
+                    <i class="bi bi-person-circle"></i>  Usuarios
                 </a>
             </div>
             
@@ -97,7 +97,7 @@
         <form id="searchForm" action="{{ route('incidencia.filtroNombre') }}" method="GET">
             <div class="form-group">
                 <label for="search">Buscar por nombre de cliente:</label>
-                <input type="text" name="search" id="search" class="form-control" value="{{ request()->input('search') }}" onkeyup="searchProducts()">
+                <input type="text" name="search" id="search" class="form-control" value="{{ request()->input('search') }}">
             </div>
         </form>
 
@@ -109,7 +109,7 @@
         @endif
 
         <!-- Contenedor de la tabla de incidencias -->
-        <div id="productTable">
+        <div id="incidenciasTable">
             @include('tables.incidencias')
         </div>
     </section>
@@ -124,6 +124,7 @@
         </div>
     </section>
 
+    <!-- Cambio de vista -->
     <script>
         document.getElementById('btnIncidencias').addEventListener('click', function() {
             document.getElementById('incidencias').style.display = 'block';
@@ -133,6 +134,27 @@
         document.getElementById('btnUsuarios').addEventListener('click', function() {
             document.getElementById('incidencias').style.display = 'none';
             document.getElementById('usuarios').style.display = 'block';
+        });
+    </script>
+
+    <!-- Script para realizar la búsqueda AJAX -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#search').on('keyup', function() {
+                var searchText = $(this).val();
+                $.ajax({
+                    url: '{{ route("incidencia.filtroNombre") }}',
+                    type: 'GET',
+                    data: {
+                        search: searchText
+                    },
+                    success: function(response) {
+                        // Actualizar la tabla con los nuevos resultados
+                        $('#incidenciasTable').html(response);
+                    }
+                });
+            });
         });
     </script>
 </body>

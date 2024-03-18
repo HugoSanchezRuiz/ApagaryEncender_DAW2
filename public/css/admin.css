@@ -3,6 +3,11 @@
     margin: 0;
 }
 
+/* Estilos para dropdown */
+.btn-secondary {
+    background-color: lightgray;
+}
+
 /* Estilos para el logotipo en la barra de navegación */
 .navbar-brand {
     display: flex;
