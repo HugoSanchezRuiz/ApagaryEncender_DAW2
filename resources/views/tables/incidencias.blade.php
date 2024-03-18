@@ -28,23 +28,25 @@
                     <th scope="col">Técnico</th>
                     <th scope="col">Cliente</th>
                     <th scope="col">Subcategoria</th>
-                    <th scope="col">Imagen</th>
                     <th scope="col">Descripción</th>
+                    <th scope="col">Imagen</th>
+                    <th scope="col">Estado</th>
                 </tr>
             </thead>
 
             <tbody>
                 @forelse ($incidencias as $incidencia)
                 <tr>
-                    <td>{{$incidencia->id_tecnico}}</td>
-                    <td>{{$incidencia->id_cliente}}</td>
-                    <td>{{$incidencia->id_subcategoria}}</td>
+                    <td>{{$incidencia->tecnico_nombre}}</td>
+                    <td>{{$incidencia->cliente_nombre}}</td>
+                    <td>{{$incidencia->subcategoria_nombre}}</td>
+                    <td>{{$incidencia->descripcion}}</td>
                     <td>{{$incidencia->imagen}}</td>
-                    <td>{{$incidencia->descripción}}</td>
+                    <td>{{$incidencia->estado}}</td>
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="5" style="text-align: center">No hay resultados</td>
+                    <td colspan="6" style="text-align: center">No hay resultados</td>
                 </tr>
                 @endforelse
             </tbody>
