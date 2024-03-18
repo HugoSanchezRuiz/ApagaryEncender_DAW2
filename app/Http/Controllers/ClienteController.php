@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Incidencia;
 use App\Models\Categoria;
 use App\Models\Subcategoria;
+use App\Models\Usuario;
+use Illuminate\Support\Facades\DB;
 
 class ClienteController extends Controller
 {
@@ -34,9 +36,9 @@ class ClienteController extends Controller
 
         // Recuperar las categorías y subcategorías independientemente de si se ha aplicado un filtro de estado
         $categorias = Categoria::all();
-        $subcategorias = [];
+        $subcategorias = Subcategoria::all();
 
-        return view('client.incident.index', compact('incidents', 'categorias', 'subcategorias', 'estados'));
+        return view('client.incident.index', compact('incidents', 'categorias', 'subcategorias', 'estados', 'userId'));
     }
 
 
@@ -49,48 +51,100 @@ class ClienteController extends Controller
             abort(403, 'No tienes permiso para ver esta incidencia.');
         }
 
+        // Obtener el nombre del cliente
+        $tecnico = Usuario::findOrFail($incident->id_tecnico);
+        $cliente = Usuario::findOrFail($incident->id_cliente);
         $categoria = Categoria::findOrFail($incident->subcategoria->id_categoria);
         $subcategoria = Subcategoria::findOrFail($incident->id_subcategoria);
 
-        return view('client.incident.show', compact('incident', 'categoria', 'subcategoria'));
+        return view('client.incident.show', compact('incident', 'categoria', 'subcategoria', 'cliente', 'tecnico'));
     }
 
-
-
-    public function create(Request $request)
+    public function store(Request $request)
     {
-        // $request->validate([
-        //     'title' => 'required|string|max:255',
-        //     'description' => 'required|string',
-        // ]);
+        try {
+            // Iniciar una transacción
+            DB::beginTransaction();
 
-        // // $user = auth()->user();
-        $descripcion = $request->input('descripcion');
-        $estado = 'Sin asignar';
-        $id_cliente = $request->input('id_cliente');
-        $nombre_subcategoria = $request->input('nombre_subcategoria');
+            // Crea una nueva instancia de Incidencia
+            $incidencia = new Incidencia();
+            $incidencia->descripcion = $request->input('descripcion');
+            $incidencia->estado = 'Sin asignar'; // Estado por defecto
+            $incidencia->id_cliente = $request->input('id_cliente');
+            $incidencia->id_subcategoria = $request->input('subcategoria');
+
+            // Verificar si se proporcionó una imagen
+            if ($request->hasFile('imagen')) {
+                $imagen = $request->file('imagen');
+                $nombreImagen = time() . '_' . $imagen->getClientOriginalName();
+                $imagen->move(public_path('img'), $nombreImagen);
+                $incidencia->imagen = $nombreImagen;
+            } else {
+                // Si no se proporciona una imagen, establecer el campo imagen como vacío
+                $incidencia->imagen = '';
+            }
 
 
-        $subcategoria = Subcategoria::where('nombre_subcategoria', $nombre_subcategoria)->first();
+            // Guarda la incidencia en la base de datos
+            $incidencia->save();
 
-        // Verificar si se encontró la subcategoría
-        if ($subcategoria) {
-            $id_subcategoria = $subcategoria->id;
-        } else {
-            echo "error";
+            // Confirmar la transacción
+            DB::commit();
+
+            return redirect()->route('client.incident')->with('success', 'Incidencia creada correctamente');
+
+            // Devuelve una respuesta de éxito
+            // return response()->json(['message' => 'Incidencia creada correctamente'], 200);
+        } catch (\Exception $e) {
+            // Revertir la transacción en caso de error
+            DB::rollback();
+
+            // Imprimir el mensaje de error para depuración
+            dd($e->getMessage());
+
+            // Devuelve una respuesta de error
+            return response()->json(['error' => 'Error al crear la incidencia'], 500);
         }
-
-        // Consulta para sacar el id de la subcategoria por su nombre
-
-        $incident = new Incidencia();
-        $incident->descripcion = $descripcion;
-        $incident->id_cliente = $id_cliente;
-        $incident->estado = $estado;
-        $incident->id_subcategoria = $id_subcategoria;
-
-
-        $incident->save();
-
-        return redirect()->route('client.incident')->with('success', 'Incidencia creada correctamente.');
     }
+
+
+
+
+
+    // public function create(Request $request)
+    // {
+    //     // $request->validate([
+    //     //     'title' => 'required|string|max:255',
+    //     //     'description' => 'required|string',
+    //     // ]);
+
+    //     // // $user = auth()->user();
+    //     $descripcion = $request->input('descripcion');
+    //     $estado = 'Sin asignar';
+    //     $id_cliente = $request->input('id_cliente');
+    //     $nombre_subcategoria = $request->input('nombre_subcategoria');
+
+
+    //     $subcategoria = Subcategoria::where('nombre_subcategoria', $nombre_subcategoria)->first();
+
+    //     // Verificar si se encontró la subcategoría
+    //     if ($subcategoria) {
+    //         $id_subcategoria = $subcategoria->id;
+    //     } else {
+    //         echo "error";
+    //     }
+
+    //     // Consulta para sacar el id de la subcategoria por su nombre
+
+    //     $incident = new Incidencia();
+    //     $incident->descripcion = $descripcion;
+    //     $incident->id_cliente = $id_cliente;
+    //     $incident->estado = $estado;
+    //     $incident->id_subcategoria = $id_subcategoria;
+
+
+    //     $incident->save();
+
+    //     return redirect()->route('client.incident')->with('success', 'Incidencia creada correctamente.');
+    // }
 }

@@ -41,8 +41,9 @@ Route::post('/login', [LoginController::class, 'login'])->name('login.submit');
 // });
 Route::get('/client/incident', [ClienteController::class, 'index'])->name('client.incident');
 Route::get('/client/incident/{id}', [ClienteController::class, 'show'])->name('client.incident.show');
-// Route::get('/client/incident/create', [ClienteController::class, 'create'])->name('client.incident.create');
 Route::post('/client/incident/create', [ClienteController::class, 'create'])->name('create');
+Route::post('client/incident', [ClienteController::class, 'store'])->name('client.incident.store');
+
 // Route::post('/client/incident/store', [ClienteController::class, 'store'])->name('client.incident.store');
 
 // Route::get('/obtener_subcategorias/{categoria}', 'CategoriaController@obtenerSubcategorias')->name('obtener_subcategorias');
