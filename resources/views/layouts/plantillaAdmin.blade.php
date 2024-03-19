@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
     <!-- Título -->
     <title>Vista de administración</title>
+    <!-- Icono -->
+    <link rel="icon" href="{{ asset('img/ApagarEncenderLogo.png') }}">
 </head>
 
 <body>
