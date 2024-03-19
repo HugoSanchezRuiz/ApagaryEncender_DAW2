@@ -1,6 +1,13 @@
 /* Reset de márgenes para todos los elementos */
 * {
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background-color: rgb(254, 248, 248);
 }
 
 /* Estilos para dropdown */
@@ -83,30 +90,17 @@ header {
 }
 
 /* Estilos para los subtítulos */
-h4 {
-    margin-top: 25px;
-    margin-bottom: 15px;
-    margin-left: 25px;
+h4, #tit_filtro {
+    margin: 15px 25px; 
     font-size: 20px;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-weight: bolder;
 }
 
-#tit_filtro {
-    margin-top: 25px;
-    margin-bottom: 15px;
-    margin-left: 25px;
-    font-size: 15px;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-}
-
 /* Estilos formulario */
-
 form {
-    margin-top: 15px;
-    margin-bottom: 15px;
-    margin-left: 25px;
-    width: 65%;
+    margin: 15px 25px; 
+    width: calc(100% - 50px); 
 }
 
 .custom-form {
@@ -115,5 +109,42 @@ form {
 }
 
 .custom-form .form-group {
-    margin-right: 10px; /* Ajusta el margen entre los elementos según lo desees */
+    margin-right: 10px; 
+}
+
+/* Estilos tabla */
+table {
+    font-size: 15px;
+}
+
+/* Estilos para las secciones */
+#incidencias {
+    margin-top: 70px;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+/* Footer */
+.custom-footer {
+    background-color: #343a40; 
+    padding: 20px 0;
+    text-align: center; 
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-around; 
+}
+
+.footer-column {
+    flex: 1; 
+}
+
+.custom-footer p {
+    margin: 5px 0; 
+    color: white;
+}
+
+.custom-footer h4 {
+    color: #fff; 
 }

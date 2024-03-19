@@ -33,7 +33,7 @@
             </div>
 
             <div class="central-icons"> <!-- Div central para iconos -->
-                <a href="#" class="mx-2" id="btnIncidencias">
+                <a href="{{ route('vistas.admin.incidencias') }}" class="mx-2" id="btnIncidencias">
                     <i class="bi bi-exclamation-circle"></i>Incidencias
                 </a>
                 
@@ -87,6 +87,29 @@
     <main class="container">
         @yield('content')
     </main>
+
+    <!-- Footer -->
+    <footer class="custom-footer">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h4>Contacto</h4>
+                <p><i class="bi bi-person-fill"></i> +123456789</p>
+                <p><i class="bi bi-envelope-fill"></i> info@apagarEncender.com</p>
+            </div>
+            <div class="footer-column">
+                <h4>Síguenos</h4>
+                <p><i class="bi bi-facebook"></i> <i class="bi bi-whatsapp"></i> <i class="bi bi-instagram"></i></p>
+            </div>
+            <div class="footer-column">
+                <h4>Encuentranos En</h4>
+                <p><i class="bi bi-geo-alt"></i>Jesuites Bellvitge - JoanXXIII</p>
+            </div>
+        </div>
+    </footer>
+        
+    <div style="background-color: yellow;">
+        <h2 style="text-align: center; color: black; font-size: 15px; padding: 20px;">¡Alerta! Esta página usa cookies. Muchas Gracias</h2>
+    </div>
 
     <!-- Bootstrap JS y JQUERY -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
