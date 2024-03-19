@@ -1,22 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
+/* CONTROLLERS IKER */
 use App\Http\Controllers\IncidenciasController;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\ClienteController;
-use App\Http\Controllers\TecnicoController;
+use App\Http\Controllers\UsuariosController;
 
-Route::middleware(['auth', 'admin'])->group(function () {
-    Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');
-    // Agrega más rutas específicas para el administrador según sea necesario
-});
-
-// Route::middleware(['auth'])->group(function () {
-//     Route::get('/', function () {
-//         return view('admin.index'); // Cambia 'admin.index' por la ruta correcta de tu vista principal para administradores
-//     })->name('home');
-// });
 
 /*
 |--------------------------------------------------------------------------
@@ -28,8 +17,15 @@ Route::middleware(['auth', 'admin'])->group(function () {
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+/* Manejo de usuarios */
+Route::get('/admin/usuarios', function () {
+    return view('vistas.admin.usuarios');
+})->name('vistas.admin.usuarios');
 
-Route::get('/login', [LoginController::class, 'showForm'])->name('login');
-Route::post('/login', [LoginController::class, 'login'])->name('login.submit');
-Route::get('/admin', [IncidenciasController::class, 'index'])->name('vistas.admin');
+/* Manejo de inicidencias */
+Route::get('/admin/incidencias', function () {
+    return view('vistas.admin.incidencias');
+})->name('vistas.admin.incidencias');
+
 Route::get('/admin/search', [IncidenciasController::class, 'filtroNombre'])->name('incidencia.filtroNombre');
+

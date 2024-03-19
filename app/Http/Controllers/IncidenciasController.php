@@ -18,7 +18,7 @@ class IncidenciasController extends Controller
         // Obtener las categorías
         $categorias = $this->getCategorias();
 
-        return view('vistas.admin', compact('incidencias', 'estados', 'categorias'));
+        return view('vistas.admin.incidencias', compact('incidencias', 'estados', 'categorias'));
     }
 
 

@@ -36,7 +36,8 @@
                 <a href="#" class="mx-2" id="btnIncidencias">
                     <i class="bi bi-exclamation-circle"></i>Incidencias
                 </a>
-                <a href="#" class="mx-2" id="btnUsuarios">
+                
+                <a href="{{ route('vistas.admin.usuarios') }}" class="mx-2" id="btnUsuarios">
                     <i class="bi bi-person-circle"></i>Usuarios
                 </a>
             </div>
@@ -124,29 +125,6 @@
             @include('tables.incidencias')
         </div>
     </section>
-
-    <section id="usuarios" style="margin-top: 70px; display: none;">
-        <header>
-            <h1>Vista de Usuarios</h1>
-        </header>
-
-        <div>
-            <h4>¡Hola Administrador! </h4>
-        </div>
-    </section>
-
-    <!-- Cambio de vista -->
-    <script>
-        document.getElementById('btnIncidencias').addEventListener('click', function() {
-            document.getElementById('incidencias').style.display = 'block';
-            document.getElementById('usuarios').style.display = 'none';
-        });
-
-        document.getElementById('btnUsuarios').addEventListener('click', function() {
-            document.getElementById('incidencias').style.display = 'none';
-            document.getElementById('usuarios').style.display = 'block';
-        });
-    </script>
 
     <!-- Bootstrap JS y JQUERY -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
