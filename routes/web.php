@@ -23,9 +23,7 @@ Route::get('/admin/usuarios', [UsuariosController::class, 'index'])->name('vista
 Route::get('/usuarios/filtrar', [UsuariosController::class, 'filtrar'])->name('usuarios.filtrar');
 
 /* Manejo de inicidencias */
-Route::get('/admin/incidencias', function () {
-    return view('vistas.admin.incidencias');
-})->name('vistas.admin.incidencias');
+Route::get('/admin/incidencias', [IncidenciasController::class, 'index'])->name('vistas.admin.incidencias');
 
-Route::get('/admin/search', [IncidenciasController::class, 'filtroNombre'])->name('incidencia.filtroNombre');
+Route::get('/admin/incidencias/filtrar', [IncidenciasController::class, 'filtroNombre'])->name('incidencias.filtrar');
 

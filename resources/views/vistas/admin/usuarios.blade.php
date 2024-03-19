@@ -2,7 +2,7 @@
 
 @section('content')
     <!-- Contenido específico de la página de incidencias -->
-    <section id="usuarios"> 
+    <section id="usuarios" style="border: 1px solid;"> 
         <div style="background-color: white">
             <header>
                 <h1>Vista de Usuarios</h1>
