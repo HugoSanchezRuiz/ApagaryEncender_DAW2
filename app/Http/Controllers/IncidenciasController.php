@@ -59,7 +59,7 @@ class IncidenciasController extends Controller
                 'usuarios_tecnico.nombre_usuario as tecnico_nombre',
                 'usuarios_cliente.nombre_usuario as cliente_nombre',
                 'subcategorias.nombre_subcategoria as subcategoria_nombre',
-                'categorias.nombre_categoria as categoria_nombre' // Agregamos la columna de nombre de categoría
+                'categorias.nombre_categoria as categoria_nombre'
             )
             ->leftJoin('tbl_usuarios as usuarios_tecnico', 'tbl_incidencias.id_tecnico', '=', 'usuarios_tecnico.id')
             ->leftJoin('tbl_usuarios as usuarios_cliente', 'tbl_incidencias.id_cliente', '=', 'usuarios_cliente.id')

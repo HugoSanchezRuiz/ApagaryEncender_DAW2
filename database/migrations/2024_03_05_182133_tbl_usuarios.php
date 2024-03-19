@@ -21,6 +21,7 @@ return new class extends Migration
             $table->enum('rol', ['Administrador', 'Cliente', 'Gestor', 'Técnico']);
             $table->boolean('supervisor')->default(false); 
             $table->unsignedBigInteger('id_sede');
+            $table->boolean('estado')->default(true); 
             $table->timestamps();
 
             // Claves foráneas

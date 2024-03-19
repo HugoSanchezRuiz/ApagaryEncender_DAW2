@@ -90,9 +90,16 @@ header {
 }
 
 /* Estilos para los subtítulos */
-h4, #tit_filtro {
+h4 {
     margin: 15px 25px; 
     font-size: 20px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: bolder;
+}
+
+#tit_filtro {
+    margin: 15px 25px; 
+    font-size: 18px;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-weight: bolder;
 }
@@ -122,6 +129,12 @@ table {
     margin-top: 70px;
     margin-left: 0px;
     margin-right: 0px;
+}
+
+#usuarios {
+    margin-top: 70px;
+    margin-left: 2px;
+    margin-right: 2px;
 }
 
 /* Footer */
