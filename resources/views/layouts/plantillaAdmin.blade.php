@@ -108,7 +108,7 @@
     </footer>
         
     <div style="background-color: yellow;">
-        <h2 style="text-align: center; color: black; font-size: 15px; padding: 20px;">¡Alerta! Esta página usa cookies. Muchas Gracias</h2>
+        <h2 style="text-align: center; color: black; font-size: 15px; padding: 20px;">¡Alerta! Esta página usa cookies. Muchas Gracias.</h2>
     </div>
 
     <!-- Bootstrap JS y JQUERY -->
