@@ -76,8 +76,13 @@ class UsuariosController extends Controller
                 return $usuario;
             });
     
-            // Devolver la vista de usuarios actualizada
-            return view('tables.usuarios', compact('usuarios'));
+            // Obtener las sedes
+            $sedes = tbl_sedes::all();
+            // Mapear los IDs de las sedes a sus nombres correspondientes
+            $sedesMap = $sedes->pluck('nombre_sede', 'id')->toArray();
+    
+            // Devolver la vista de usuarios actualizada with the sedesMap variable
+            return view('tables.usuarios', compact('usuarios', 'sedesMap'));
         } 
         
         catch (\Exception $e) {
