@@ -72,9 +72,9 @@
             // Función para enviar el formulario de búsqueda y actualizar la tabla de usuarios
             function filtrarUsuarios() {
                 $.ajax({
-                    url: $('#searchForm').attr('action'),
+                    url: "{{ route('usuarios.filtrar') }}", // Ruta del controlador para filtrar usuarios
                     type: 'GET',
-                    data: $('#searchForm').serialize(),
+                    data: $('#searchForm').serialize(), // Serializar el formulario
                     success: function(response) {
                         $('#usuariosTable').html(response);
                     },
@@ -88,15 +88,6 @@
             // Evento para capturar cambios en los filtros y llamar a la función de filtrado
             $('#searchForm input, #searchForm select').on('change keyup', function() {
                 filtrarUsuarios();
-            });
-
-            // Manejar la selección "Todos" en los filtros
-            $('#estado, #sede, #supervisor, #rol').on('change', function() {
-                if ($(this).val() === '') {
-                    // Si se selecciona "Todos", restablecer el formulario y volver a filtrar
-                    $('#searchForm').trigger('reset');
-                    filtrarUsuarios();
-                }
             });
 
             // Filtrar usuarios al cargar la página

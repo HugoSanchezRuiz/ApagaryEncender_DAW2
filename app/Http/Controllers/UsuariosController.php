@@ -48,23 +48,17 @@ class UsuariosController extends Controller
             if ($request->has('search')) {
                 $usuariosQuery->where('nombre_usuario', 'like', '%' . $request->search . '%');
             }
-            if ($request->has('supervisor')) {
+            if ($request->filled('supervisor')) {
                 $usuariosQuery->where('supervisor', $request->supervisor);
             }
-            if ($request->has('estado')) {
-                if ($request->estado !== '') {
-                    $usuariosQuery->where('estado', $request->estado);
-                }
+            if ($request->filled('estado')) {
+                $usuariosQuery->where('estado', $request->estado);
             }
-            if ($request->has('sede')) {
-                if ($request->sede !== '') {
-                    $usuariosQuery->where('id_sede', $request->sede);
-                }
+            if ($request->filled('sede')) {
+                $usuariosQuery->where('id_sede', $request->sede);
             }
-            if ($request->has('rol')) {
-                if ($request->rol !== '') {
-                    $usuariosQuery->where('rol', $request->rol);
-                }
+            if ($request->filled('rol')) {
+                $usuariosQuery->where('rol', $request->rol);
             }            
     
             $usuarios = $usuariosQuery->get();
@@ -81,7 +75,7 @@ class UsuariosController extends Controller
             // Mapear los IDs de las sedes a sus nombres correspondientes
             $sedesMap = $sedes->pluck('nombre_sede', 'id')->toArray();
     
-            // Devolver la vista de usuarios actualizada with the sedesMap variable
+            // Devolver la vista de usuarios actualizada con el sedesMap variable
             return view('tables.usuarios', compact('usuarios', 'sedesMap'));
         } 
         
