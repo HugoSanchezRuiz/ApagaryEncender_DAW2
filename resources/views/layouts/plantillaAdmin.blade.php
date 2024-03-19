@@ -46,39 +46,14 @@
             
             <div>
                 <!-- Dropdowns -->
-                <div class="dropdown" style="display: inline-block; margin-right: 10px;">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="bellDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="bi bi-bell" style="font-size: larger; font-weight: bold;"></i>
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="bellDropdown">
-                        <!-- Contenido del menú desplegable -->
-                        <li><a class="dropdown-item" href="#">Opción 1</a></li>
-                        <li><a class="dropdown-item" href="#">Opción 2</a></li>
-                        <li><a class="dropdown-item" href="#">Opción 3</a></li>
-                    </ul>
-                </div>
-
-                <div class="dropdown" style="display: inline-block; margin-right: 10px;">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="chatDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="bi bi-chat-left" style="font-size: larger; font-weight: bold;"></i>
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="chatDropdown">
-                        <!-- Contenido del menú desplegable -->
-                        <li><a class="dropdown-item" href="#">Opción 1</a></li>
-                        <li><a class="dropdown-item" href="#">Opción 2</a></li>
-                        <li><a class="dropdown-item" href="#">Opción 3</a></li>
-                    </ul>
-                </div>
-
                 <div class="dropdown" style="display: inline-block; margin-right: 20px;">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="imgDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                         <img src="{{ asset('img/AD.png') }}" style="width: 28px;" alt="">
                     </button>
+
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="imgDropdown">
                         <!-- Contenido del menú desplegable -->
-                        <li><a class="dropdown-item" href="#">Opción 1</a></li>
-                        <li><a class="dropdown-item" href="#">Opción 2</a></li>
-                        <li><a class="dropdown-item" href="#">Opción 3</a></li>
+                        <li><a class="dropdown-item" href="#">Cerrar Sesión</a></li>
                     </ul>
                 </div>
             </div>        
