@@ -18,9 +18,9 @@ use App\Http\Controllers\UsuariosController;
 |
 */
 /* Manejo de usuarios */
-Route::get('/admin/usuarios', function () {
-    return view('vistas.admin.usuarios');
-})->name('vistas.admin.usuarios');
+Route::get('/admin/usuarios', [UsuariosController::class, 'index'])->name('vistas.admin.usuarios');
+
+Route::get('/usuarios/filtrar', [UsuariosController::class, 'filtrar'])->name('usuarios.filtrar');
 
 /* Manejo de inicidencias */
 Route::get('/admin/incidencias', function () {
