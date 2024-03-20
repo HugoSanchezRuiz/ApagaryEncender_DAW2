@@ -32,6 +32,8 @@
                     <th scope="col">Descripción</th>
                     <th scope="col">Imagen</th>
                     <th scope="col">Estado</th>
+                    <th scope="col">Fecha Inicio</th>
+                    <th scope="col">Fecha Fin</th>
                 </tr>
             </thead>
 
@@ -45,6 +47,8 @@
                     <td>{{$incidencia->descripcion}}</td>
                     <td>{{$incidencia->imagen}}</td>
                     <td>{{$incidencia->estado}}</td>
+                    <td>{{$incidencia->created_at}}</td>
+                    <td>{{$incidencia->updated_at}}</td>
                 </tr>
                 @empty
                 <tr>
