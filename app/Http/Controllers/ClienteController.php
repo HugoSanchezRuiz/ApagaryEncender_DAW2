@@ -9,47 +9,38 @@ use App\Models\Subcategoria;
 use App\Models\Usuario;
 use Illuminate\Support\Facades\DB;
 
+
 class ClienteController extends Controller
 {
-    public function index(Request $request)
+
+    public function index()
     {
-        $userId = 1; // Reemplaza esto con el ID del usuario actual
-        $query = Incidencia::where('id_cliente', $userId);
-        $estados = Incidencia::obtenerEstadosDisponibles();
-        $order = $request->input('orden');
-
-        // Verificar si se ha seleccionado un estado en el formulario
-        if ($request->filled('filtro_estado')) {
-            $filtro_estado = $request->input('filtro_estado');
-            $query->where('estado', $filtro_estado);
-        }
-
-        // Aplicar el orden seleccionado
-        if ($order === 'asc') {
-            $query->orderBy('id', 'asc');
-        } elseif ($order === 'desc') {
-            $query->orderBy('id', 'desc');
-        }
-
-        // Obtener las incidencias
-        $incidents = $query->get();
-
-        // Recuperar las categorías y subcategorías independientemente de si se ha aplicado un filtro de estado
+        $userId = 1;
+    
+        // Obtener todas las incidencias para el usuario
+        $incidencias = Incidencia::where('id_cliente', $userId)->get();
+    
+        // Obtener todas las categorías y subcategorías
         $categorias = Categoria::all();
         $subcategorias = Subcategoria::all();
-
-        return view('client.incident.index', compact('incidents', 'categorias', 'subcategorias', 'estados', 'userId'));
+    
+        // Pasar los datos a la vista
+        return view('index', [
+            'incidencias' => $incidencias,
+            'categorias' => $categorias,
+            'subcategorias' => $subcategorias,
+            'userId' => $userId,
+        ]);
     }
-
 
     public function show($id)
     {
-        $incident = Incidencia::findOrFail($id);
+        $incident = Incidencia::find($id);
 
-        // Verifica si el usuario tiene acceso a esta incidencia
-        if ($incident->id_cliente !== 1) {
-            abort(403, 'No tienes permiso para ver esta incidencia.');
-        }
+        // // Verifica si el usuario tiene acceso a esta incidencia
+        // if ($incident->id_cliente !== 1) {
+        //     abort(403, 'No tienes permiso para ver esta incidencia.');
+        // }
 
         // Obtener el nombre del cliente
         $tecnico = Usuario::findOrFail($incident->id_tecnico);
@@ -57,7 +48,51 @@ class ClienteController extends Controller
         $categoria = Categoria::findOrFail($incident->subcategoria->id_categoria);
         $subcategoria = Subcategoria::findOrFail($incident->id_subcategoria);
 
-        return view('client.incident.show', compact('incident', 'categoria', 'subcategoria', 'cliente', 'tecnico'));
+        return view('show', compact('incident', 'categoria', 'subcategoria', 'cliente', 'tecnico'));
+    }
+
+    public function getCargarIncidencias()
+    {
+        $userId = 1;
+        $incidencias = Incidencia::where('id_cliente', $userId)->get();
+        $categorias = Categoria::all();
+        $subcategorias = Subcategoria::all();
+
+        return response()->json([
+            'incidents' => $incidencias,
+            'categorias' => $categorias,
+            'subcategories' => $subcategorias
+        ]);
+    }
+
+    public function getFiltrarIncidencias(Request $request)
+    {
+        $estado = $request->input('filtro_estado');
+    
+        // Verifica si se seleccionó la opción "todos"
+        if ($estado == 'todos') {
+            // Obtener todas las incidencias del usuario
+            $userId = 1; // Ajusta esto según la lógica de tu aplicación
+            $incidencias = Incidencia::where('id_cliente', $userId)->get();
+        } else {
+            // Obtener las incidencias según el estado seleccionado
+            $incidencias = Incidencia::where('estado', $estado)->get();
+        }
+    
+        // Verifica si la colección de incidencias está vacía
+        if ($incidencias->isEmpty()) {
+            return response()->json(['message' => 'No hay incidencias con ese estado']);
+        }
+    
+        return response()->json(['incidents' => $incidencias]);
+    }
+    
+
+    public function getOrdenarIncidencias(Request $request)
+    {
+        $orden = $request->input('orden');
+        $incidencias = Incidencia::orderBy('estado', $orden)->get();
+        return response()->json(['incidents' => $incidencias]);
     }
 
     public function store(Request $request)
@@ -91,10 +126,10 @@ class ClienteController extends Controller
             // Confirmar la transacción
             DB::commit();
 
-            return redirect()->route('client.incident')->with('success', 'Incidencia creada correctamente');
+            // return redirect()->route('index')->with('success', 'Incidencia creada correctamente');
 
             // Devuelve una respuesta de éxito
-            // return response()->json(['message' => 'Incidencia creada correctamente'], 200);
+            return response()->json(['message' => 'Incidencia creada correctamente'], 200);
         } catch (\Exception $e) {
             // Revertir la transacción en caso de error
             DB::rollback();
@@ -107,44 +142,12 @@ class ClienteController extends Controller
         }
     }
 
+    public function getSubcategorias($categoria_id)
+    {
+        // Obtener las subcategorías asociadas a la categoría seleccionada
+        $subcategorias = Subcategoria::where('id_categoria', $categoria_id)->get();
 
-
-
-
-    // public function create(Request $request)
-    // {
-    //     // $request->validate([
-    //     //     'title' => 'required|string|max:255',
-    //     //     'description' => 'required|string',
-    //     // ]);
-
-    //     // // $user = auth()->user();
-    //     $descripcion = $request->input('descripcion');
-    //     $estado = 'Sin asignar';
-    //     $id_cliente = $request->input('id_cliente');
-    //     $nombre_subcategoria = $request->input('nombre_subcategoria');
-
-
-    //     $subcategoria = Subcategoria::where('nombre_subcategoria', $nombre_subcategoria)->first();
-
-    //     // Verificar si se encontró la subcategoría
-    //     if ($subcategoria) {
-    //         $id_subcategoria = $subcategoria->id;
-    //     } else {
-    //         echo "error";
-    //     }
-
-    //     // Consulta para sacar el id de la subcategoria por su nombre
-
-    //     $incident = new Incidencia();
-    //     $incident->descripcion = $descripcion;
-    //     $incident->id_cliente = $id_cliente;
-    //     $incident->estado = $estado;
-    //     $incident->id_subcategoria = $id_subcategoria;
-
-
-    //     $incident->save();
-
-    //     return redirect()->route('client.incident')->with('success', 'Incidencia creada correctamente.');
-    // }
+        // Devolver las subcategorías como una respuesta JSON
+        return response()->json(['subcategorias' => $subcategorias]);
+    }
 }
