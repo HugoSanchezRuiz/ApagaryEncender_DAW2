@@ -58,6 +58,14 @@
                 </div>
             </form>
 
+            @if(session('error'))
+                <div class="alert alert-danger">{{ session('error') }}</div>
+            @endif
+
+            @if(session('success'))
+                <div class="alert alert-success">{{ session('success') }}</div>
+            @endif
+
             <!-- Contenedor de la tabla de usuarios -->
             <div id="usuariosTable">
                 @include('tables.usuarios')
@@ -77,19 +85,26 @@
                     data: $('#searchForm').serialize(), // Serializar el formulario
                     success: function(response) {
                         $('#usuariosTable').html(response);
+                        // Mostrar mensajes de éxito o error si están presentes en la respuesta
+                        if (response.includes('alert-success')) {
+                            $('.alert-success').fadeIn().delay(3000).fadeOut(); // Muestra el mensaje de éxito durante 3 segundos
+                        } else if (response.includes('alert-danger')) {
+                            $('.alert-danger').fadeIn().delay(3000).fadeOut(); // Muestra el mensaje de error durante 3 segundos
+                        }
                     },
                     error: function(xhr, status, error) {
                         console.error('Error al filtrar usuarios:', error);
-                        // Aquí puedes agregar código para manejar el error, como mostrar un mensaje al usuario
+                        // Muestra un mensaje de error al usuario
+                        $('.alert-danger').html('Error al filtrar usuarios. Por favor, inténtalo de nuevo más tarde.').fadeIn().delay(3000).fadeOut();
                     }
                 });
             }
-
+        
             // Evento para capturar cambios en los filtros y llamar a la función de filtrado
             $('#searchForm input, #searchForm select').on('change keyup', function() {
                 filtrarUsuarios();
             });
-
+        
             // Filtrar usuarios al cargar la página
             filtrarUsuarios();
         });

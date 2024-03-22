@@ -97,12 +97,23 @@ h4 {
     font-weight: bolder;
 }
 
-#tit_filtro {
+h2{
     margin: 15px 25px; 
     font-size: 18px;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-weight: bolder;
 }
+
+/* Estilos btn crear incidencia */
+#btn-crearIncidencia {
+    margin-left: 25px; 
+    background-color: #5FA3EB;
+}
+
+#btn-crearIncidencia:hover {
+    background-color: #518bca;
+}
+
 
 /* Estilos formulario */
 form {

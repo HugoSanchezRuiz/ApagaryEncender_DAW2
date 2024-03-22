@@ -32,8 +32,8 @@
                     <th scope="col">Descripción</th>
                     <th scope="col">Imagen</th>
                     <th scope="col">Estado</th>
-                    <th scope="col">Fecha Inicio</th>
-                    <th scope="col">Fecha Fin</th>
+                    <th scope="col">Inicio</th>
+                    <th scope="col">Fin</th>
                 </tr>
             </thead>
 

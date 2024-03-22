@@ -40,7 +40,12 @@
                         <td>{{ $usuario->rol }}</td>
                         <td>{{ $usuario->supervisor }}</td>
                         <td>{{ isset($sedesMap[$usuario->id_sede]) ? $sedesMap[$usuario->id_sede] : 'Sede Desconocida' }}</td>
-                        <td>{{ $usuario->estado }}</td>
+                        <td>
+                            <select class="form-control estado-select" data-id="{{ $usuario->id }}">
+                                <option value="1" {{ $usuario->estado == 'Activo' ? 'selected' : '' }}>Activo</option>
+                                <option value="0" {{ $usuario->estado == 'Inactivo' ? 'selected' : '' }}>Inactivo</option>
+                            </select>
+                        </td>
                     </tr>
                 @empty
                     <tr>
@@ -48,6 +53,33 @@
                     </tr>
                 @endforelse
             </tbody>
+
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script>
+                $(document).ready(function() {
+                    $('.estado-select').change(function() {
+                        var userId = $(this).data('id');
+                        var newState = $(this).val();
+
+                        $.ajax({
+                            url: '/usuarios/' + userId + '/actualizarEstado',
+                            type: 'POST',
+                            data: {
+                                _token: '{{ csrf_token() }}',
+                                estado: newState
+                            },
+                            success: function(response) {
+                                // Manejar éxito si es necesario
+                                console.log(response);
+                            },
+                            error: function(xhr) {
+                                // Manejar errores si es necesario
+                                console.log(xhr.responseText);
+                            }
+                        });
+                    });
+                });
+            </script>
         </table>
     </div>
 </body>

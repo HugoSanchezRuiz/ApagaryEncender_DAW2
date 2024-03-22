@@ -84,4 +84,26 @@ class UsuariosController extends Controller
             return response()->json(['error' => 'Error al filtrar usuarios: ' . $e->getMessage()], 500);
         }
     }
-}
+
+    public function actualizarEstado(Request $request, $id)
+    {
+        try {
+            $usuario = tbl_usuarios::findOrFail($id);
+    
+            // Verificar si el usuario es administrador
+            if ($usuario->rol === 'Administrador') {
+                return redirect()->back()->with('error', 'No se puede desactivar al administrador.');
+            }
+    
+            // Actualizar estado del usuario
+            $usuario->estado = $request->estado;
+            $usuario->save();
+    
+            return redirect()->route('vistas.admin.usuarios')->with('success', 'Estado del usuario actualizado correctamente.');
+        } 
+    
+        catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Error al actualizar estado del usuario: ' . $e->getMessage());
+        }            
+    }
+}   
